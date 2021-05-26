@@ -19,5 +19,8 @@ public interface ProductService {
 	Product FindByString(String name) throws ProductNotFoundException;
 
 	void updateDate(Product Product) throws ProductNotFoundException;
+	
+	void delete_name(String name) throws ProductNotFoundException;
 
+	
 }

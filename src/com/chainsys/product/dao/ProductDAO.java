@@ -18,4 +18,7 @@ public interface ProductDAO {
 	Product findByString(String name);
 
 	void updateDate(Product product);
+	
+	void delete_name(String name);
+
 }
