@@ -5,22 +5,19 @@ import java.time.LocalDate;
 public class Product {
 	private int id;
 	private String name;
-	private String expiryDate;
+	private LocalDate expiryDate;
 
 	public Product() {
 
 	}
 
-	public Product(int id, String name, String expiryDate) {
+	public Product(int id, String name, LocalDate expiryDate) {
 		this.id = id;
 		this.name = name;
 		this.expiryDate = expiryDate;
 	}
 
-	public Product(int int1, String string, LocalDate localDate) {
-		// TODO Auto-generated constructor stub
-	}
-
+	
 	public int getId() {
 		return id;
 	}
@@ -37,11 +34,11 @@ public class Product {
 		this.name = name;
 	}
 
-	public String getExpiryDate() {
+	public LocalDate getExpiryDate() {
 		return expiryDate;
 	}
 
-	public void setExpiryDate(String expiryDate) {
+	public void setExpiryDate(LocalDate expiryDate) {
 		this.expiryDate = expiryDate;
 	}
 

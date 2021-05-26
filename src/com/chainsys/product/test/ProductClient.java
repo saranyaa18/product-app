@@ -81,22 +81,25 @@ public class ProductClient {
 				System.out.println(product);
 			} catch (ProductNotFoundException e) {
 			}
-			
-			break;
-			
-		
-	 }
-	case 7:
-	  System.out.println("Update the Product expiry date Based on the Id");
-	 date = scanner.next();
-	 dateFormat = DateTimeFormatter.ofPattern("dd/mm/yyyy");
-	 Product updateProduct = new Product(4, "Pencil", LocalDate.parse(date, dateFormat));
-	 try {
-		service.update(updateProduct);
-		productSet = service.findAll();
-		System.out.println(productSet);
-	} catch (ProductNotFoundException e) {
 
-	}
+			break;
+		case 7:
+
+			System.out.println("Update the Product expiry date Based on the Id");
+			System.out.println("enter the id");
+			id = scanner.nextInt();
+			System.out.println("enter the date");
+			date = scanner.next();
+			dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			Product updateDateProduct = new Product(id, "Pencil", LocalDate.parse(date, dateFormat));
+			try {
+				service.updateDate(updateDateProduct);
+				productSet = service.findAll();
+				System.out.println(productSet);
+			} catch (ProductNotFoundException e) {
+			}
+		}
+
 		scanner.close();
+	}
 }

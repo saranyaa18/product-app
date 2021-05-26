@@ -18,4 +18,6 @@ public interface ProductService {
 
 	Product FindByString(String name) throws ProductNotFoundException;
 
+	void updateDate(Product Product) throws ProductNotFoundException;
+
 }
