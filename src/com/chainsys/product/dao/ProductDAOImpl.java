@@ -2,6 +2,7 @@ package com.chainsys.product.dao;
 
 import java.sql.Connection;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,7 +18,7 @@ public class ProductDAOImpl implements ProductDAO {
 	private static PreparedStatement pstmt;
 	private static ResultSet rs;
 	private static Set<Product> productSet;
-
+	
 	public ProductDAOImpl() {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -102,7 +103,7 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public Product findByString(String name) {
+	public Product findByName(String name) {
 		Product product = null;
 		try {
 			pstmt = con.prepareStatement("select * from product_2604 where name=?");
@@ -118,7 +119,7 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public void updateDate(Product product) {
+	public void update_expire(Product product) {
 		try {
 			pstmt = con.prepareStatement("update product_2604 set expiry_date=? where id=?");
 			pstmt.setDate(1, Date.valueOf(product.getExpiryDate()));
@@ -139,6 +140,35 @@ public class ProductDAOImpl implements ProductDAO {
 			e.printStackTrace();
 		}
 
+	}
+
+	@Override
+	public void delete_date(LocalDate expiryDate) {
+		try {
+			pstmt = con.prepareStatement("delete product_2604 where expiry_date=?");
+			pstmt.setDate(1, Date.valueOf(expiryDate));
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	@Override
+	public Product findByDate(LocalDate expiryDate) {
+		Product product = null;
+		try {
+			pstmt = con.prepareStatement("select * from product_2604 where expiry_date=?");
+			pstmt.setDate(1, Date.valueOf(expiryDate));
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				product = new Product(rs.getInt("id"), rs.getString("name"), rs.getDate("expiry_date").toLocalDate());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return product;
 	}
 
 }

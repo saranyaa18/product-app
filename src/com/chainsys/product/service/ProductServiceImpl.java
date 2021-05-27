@@ -1,7 +1,8 @@
 package com.chainsys.product.service;
 
+import java.time.LocalDate;
 import java.util.Set;
-
+//import java.util.List;
 import com.chainsys.product.dao.ProductDAO;
 import com.chainsys.product.dao.ProductDAOImpl;
 import com.chainsys.product.exception.ProductNotFoundException;
@@ -57,8 +58,8 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public Product FindByString(String name) throws ProductNotFoundException {
-		Product Product = dao.findByString(name);
+	public Product FindByName(String name) throws ProductNotFoundException {
+		Product Product = dao.findByName(name);
 		if (Product == null) {
 			throw new ProductNotFoundException("Product name Not Found");
 		} else {
@@ -67,22 +68,43 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
-	public void updateDate(Product product) throws ProductNotFoundException {
+	public void update_expire(Product product) throws ProductNotFoundException {
 		Product result = dao.findById(product.getId());
 		if (result == null) {
 			throw new ProductNotFoundException("Product Id Not Found");
 		} else {
-			dao.updateDate(product);
+			dao.update_expire(product);
 		}
 	}
 	@Override
 	public void delete_name(String name) throws ProductNotFoundException {
-		Product Product = dao.findByString(name);
+		Product Product = dao.findByName(name);
 		if (Product == null) {
 			throw new ProductNotFoundException("Product doesn't exist!!");
 		} else {
 			dao.delete_name(name);
 		}
 	}
+	
+	@Override
+	public void delete_date(LocalDate expiryDate) throws ProductNotFoundException {
+		Product Product = dao.findByDate(expiryDate);
+		if (Product == null) {
+			throw new ProductNotFoundException("Product doesn't exist!!");
+		} else {
+			dao.delete_date(expiryDate);
+		}
+	}
+
+	@Override
+	public Product findByDate(LocalDate expiryDate) throws ProductNotFoundException {
+		Product Product = dao.findByDate( expiryDate);
+		if (Product == null) {
+			throw new ProductNotFoundException("Product  Not Found");
+		} else {
+			return Product;
+		}
+	}
 }
+	
 
