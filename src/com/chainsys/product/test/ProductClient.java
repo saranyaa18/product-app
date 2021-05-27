@@ -2,7 +2,7 @@
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-//import java.util.List;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -15,8 +15,7 @@ public class ProductClient {
 	public static void main(String[] args) {
 
 		Set<Product> productSet;
-		//List<String> namelist;
-		//List<Integer> idlist;
+		List<String> namelist;
 		ProductService service = new ProductServiceImpl();
 		String date;
 		DateTimeFormatter dateFormat;
@@ -142,6 +141,12 @@ public class ProductClient {
 			}
 			break;
 		
+		case 11:
+			System.out.println("Find All Products Names");
+			namelist = service.findAllName();
+			System.out.println(namelist);
+			break;
+			
 		default:
 			break;
 		}

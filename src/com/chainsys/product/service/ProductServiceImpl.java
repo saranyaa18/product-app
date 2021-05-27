@@ -2,7 +2,7 @@ package com.chainsys.product.service;
 
 import java.time.LocalDate;
 import java.util.Set;
-//import java.util.List;
+import java.util.List;
 import com.chainsys.product.dao.ProductDAO;
 import com.chainsys.product.dao.ProductDAOImpl;
 import com.chainsys.product.exception.ProductNotFoundException;
@@ -104,6 +104,11 @@ public class ProductServiceImpl implements ProductService {
 		} else {
 			return Product;
 		}
+	}
+
+	@Override
+	public List<String> findAllName() {
+		return dao.findAllName();
 	}
 }
 	
